@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+    <style>
+        .form-grid {
+            display: grid;
+            grid-template-columns: max-content max-content;
+            gap: 8px 12px;
+            align-items: center;
+        }
+
+        fieldset {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Add new product</h1>
+
+        <form action="/products"
+              method="post"
+              enctype="multipart/form-data"
+              autocomplete="off">
+
+            <!-- Add novalidate to test disabling validation:
+                 <form ... novalidate> -->
+
+            <fieldset>
+                <legend>Personal info</legend>
+
+                <div class="form-grid">
+
+                    <label for="user-name">Full name:</label>
+                    <input id="user-name"
+                           name="user-name"
+                           type="text"
+                           placeholder="John Smith"
+                           minlength="3"
+                           maxlength="60"
+                           autocomplete="name"
+                           autofocus
+                           required>
+
+                    <label for="user-email">Email address:</label>
+                    <input id="user-email"
+                           name="user-email"
+                           type="email"
+                           placeholder="john@example.com"
+                           autocomplete="email"
+                           required>
+                    <!-- Test: add disabled while keeping required -->
+
+                    <label for="user-tel">Phone number:</label>
+                    <div>
+                        <input type="tel"
+                               value="+48"
+                               size="3"
+                               readonly
+                               aria-label="Dial code">
+
+                        <input id="user-tel"
+                               name="user-tel"
+                               type="tel"
+                               placeholder="123 456 789"
+                               minlength="9"
+                               maxlength="20"
+                               autocomplete="tel-national">
+                    </div>
+
+                    <label for="user-register">Create an account:</label>
+                    <input id="user-register"
+                           name="user-register"
+                           type="checkbox"
+                           checked>
+                    <!-- Test: add disabled while keeping checked -->
+
+                    <label for="user-password">Password:</label>
+                    <input id="user-password"
+                           name="user-password"
+                           type="password"
+                           placeholder="Min. 8 characters"
+                           minlength="8"
+                           maxlength="64"
+                           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,64}"
+                           title="At least 8 characters, including uppercase, lowercase and digit"
+                           autocomplete="new-password"
+                           required>
+
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Product info</legend>
+
+                <div class="form-grid">
+
+                    <label for="product-type">Product type:</label>
+                    <select id="product-type"
+                            name="product-type"
+                            required>
+                        <option value="" disabled selected hidden>
+                            -- choose --
+                        </option>
+                        <optgroup label="Electronics">
+                            <option value="phone">Phone</option>
+                            <option value="laptop">Laptop</option>
+                        </optgroup>
+                        <optgroup label="Fashion">
+                            <option value="clothing">Clothing</option>
+                            <option value="footwear">Footwear</option>
+                        </optgroup>
+                    </select>
+
+                    <label for="product-price">Price:</label>
+                    <input id="product-price"
+                           name="product-price"
+                           type="range"
+                           min="0" max="500">
+
+                    <label for="product-desc">Description:</label>
+                    <textarea id="product-desc"
+                              name="product-desc"
+                              rows="3" cols="35"
+                              minlength="10" maxlength="500"
+                              placeholder="Short product description..."></textarea>
+
+                    <label for="product-maker">Maker:</label>
+                    <select id="product-maker"
+                            name="product-maker">
+                        <option value="apple">Apple</option>
+                        <option value="samsung">Samsung</option>
+                    </select>
+
+                    <label>Warranty period:</label>
+                    <div>
+                        <label for="warranty-12">
+                            <input id="warranty-12"
+                                   type="radio"
+                                   name="product-warranty"
+                                   value="12"
+                                   checked>
+                            12 months
+                        </label>
+
+                        <label for="warranty-24">
+                            <input id="warranty-24"
+                                   type="radio"
+                                   name="product-warranty"
+                                   value="24">
+                            24 months
+                        </label>
+                        <!-- Test: add checked to both radio inputs -->
+                    </div>
+
+                    <label for="product-pic">Product photo:</label>
+                    <input id="product-pic"
+                           name="product-pic"
+                           type="file"
+                           accept="image/*">
+
+                    <label for="product-date">Purchase date:</label>
+                    <input id="product-date"
+                           name="product-date"
+                           type="date"
+                           min="2000-01-01"
+                           max="2026-10-12">
+
+                    <label for="product-tags">Tags:</label>
+                    <select id="product-tags"
+                            name="product-tags"
+                            multiple
+                            size="3">
+                        <option value="new">New</option>
+                        <option value="used">Used</option>
+                        <option value="popular">Popular</option>
+                    </select>
+
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Action</legend>
+
+                <input type="reset" value="Reset">
+                <input type="submit" value="Submit">
+
+                <button type="submit" formnovalidate
+                        formaction="/products/draft">
+                    Save draft
+                </button>
+            </fieldset>
+
+        </form>
+    </main>
+</body>
+</html>
